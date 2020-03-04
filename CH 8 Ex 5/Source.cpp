@@ -25,6 +25,7 @@ vector<int> swapped_vector;
 functions declarations
 */
 
+/*
 int swap_vector_one(vector<int>& v, vector<int>& sv) {
 	int count{ 0 };
 	for (size_t i = v.size() - 1; i != -1; i--)
@@ -34,6 +35,23 @@ int swap_vector_one(vector<int>& v, vector<int>& sv) {
 	}
 	return(count);
 }
+*/
+
+int swap_vector_one(vector<int>& v, vector<int>& sv) {
+	int count{ 0 };
+	for (auto i = v.end() - 1; i >= v.begin(); i--)  //does not work - can't decrement i past beginning
+	{
+		count++;
+		sv.push_back(*i);
+	}
+	return(count);
+}
+
+
+
+
+
+
 
 int swap_vector_two(vector<int>& v) {
 	int count{ 0 };
@@ -47,7 +65,9 @@ int swap_vector_two(vector<int>& v) {
 
 void myprint(vector<int>& v) {
 	cout << "Vector: ";
-	for (int i = 0; i < v.size(); i++) cout << v[i] << " ";
+//	for (int i = 0; i < v.size(); i++) cout << v[i] << " ";   old stule
+
+	for (int &i : v) cout << i << " ";			//New style iterating over the full range
 
 }
 
