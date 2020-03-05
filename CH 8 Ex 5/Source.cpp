@@ -39,20 +39,15 @@ int swap_vector_one(vector<int>& v, vector<int>& sv) {
 
 int swap_vector_one(vector<int>& v, vector<int>& sv) {
 	int count{ 0 };
-	for (auto i = v.end() - 1; i >= v.begin(); i--)  //does not work - can't decrement i past beginning
+	for (auto ritr = v.rbegin(); ritr != v.rend(); ritr++)  //This is the preferred wy with reverse iterators
 	{
 		count++;
-		sv.push_back(*i);
+		sv.push_back(*ritr);
 	}
 	return(count);
 }
 
-
-
-
-
-
-
+/*
 int swap_vector_two(vector<int>& v) {
 	int count{ 0 };
 	for (size_t i = 0; i < v.size() / 2; i++)
@@ -62,10 +57,22 @@ int swap_vector_two(vector<int>& v) {
 	}
 	return(count);
 }
+*/
+
+int swap_vector_two(vector<int>& v) {  // the iterator version
+	int count{ 0 };
+	auto ritr = v.rbegin();
+	for (auto itr = v.begin(); (itr - v.begin()) < (v.size() / 2); itr++)
+	{
+		swap(*itr, *ritr);
+		ritr++;
+	}
+	return(count);
+}
 
 void myprint(vector<int>& v) {
 	cout << "Vector: ";
-//	for (int i = 0; i < v.size(); i++) cout << v[i] << " ";   old stule
+//	for (int i = 0; i < v.size(); i++) cout << v[i] << " ";   old style
 
 	for (int &i : v) cout << i << " ";			//New style iterating over the full range
 
